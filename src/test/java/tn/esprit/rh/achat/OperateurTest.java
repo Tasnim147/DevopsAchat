@@ -1,7 +1,9 @@
 package tn.esprit.rh.achat;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,8 +24,6 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = {OperateurServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 public class OperateurTest {
-
-
 
     @MockBean
     private OperateurRepository operateurRepository;
@@ -46,5 +46,5 @@ public class OperateurTest {
         operateurServiceImpl.deleteOperateur(123L);
         verify(operateurRepository).deleteById((Long) any());
     }
-    
+  
 }
