@@ -3,7 +3,6 @@ package tn.esprit.rh.achat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,11 +20,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tn.esprit.rh.achat.controllers.StockRestController;
-import tn.esprit.rh.achat.entities.Operateur;
 import tn.esprit.rh.achat.entities.Stock;
-import tn.esprit.rh.achat.repositories.OperateurRepository;
 import tn.esprit.rh.achat.repositories.StockRepository;
-import tn.esprit.rh.achat.services.OperateurServiceImpl;
 import tn.esprit.rh.achat.services.StockServiceImpl;
 
 import java.util.ArrayList;
@@ -43,20 +38,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith( SpringRunner.class)
 @ContextConfiguration(classes = {StockServiceImpl.class})
-//@RunWith(MockitoJUnitRunner.class)
-
 public class MockitoTest {
-
-
-
-    //op
-//    @InjectMocks
-//    private OperateurServiceImpl operateurServiceImpl;
-//
-//    @Mock
-//    private OperateurRepository operateurRepository;
-///
-
 
     private StockServiceImpl service;
     private StockRepository repository;
@@ -109,9 +91,4 @@ public class MockitoTest {
 
     }
 
-
-
-
-
 }
-
