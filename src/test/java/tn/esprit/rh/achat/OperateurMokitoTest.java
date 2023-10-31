@@ -38,7 +38,21 @@ public class OperateurMokitoTest {
 //    public void setUp() {
 //        MockitoAnnotations.openMocks(this);
 //    }
+@Test
+public void addOperateurTest() {
+    // Arrange
+    long id1 = 11;
+    Operateur newOperateur = new Operateur(id1, "aaaa", "azerty", "a100");
+    when(operateurRepository.save(newOperateur)).thenReturn(newOperateur);
 
+    // Act
+    Operateur addedOperateur = operateurServiceImpl.addOperateur(newOperateur);
+
+    // Assert
+    assertNotNull(addedOperateur);
+    assertEquals(id1, addedOperateur.getIdOperateur());
+    // Vous pouvez ajouter d'autres assertions en fonction de ce que vous voulez tester.
+}
     @Test
     public void retrieveAllOperateursTest() {
         // Arrange
