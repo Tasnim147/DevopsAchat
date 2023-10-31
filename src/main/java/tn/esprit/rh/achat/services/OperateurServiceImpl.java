@@ -32,8 +32,8 @@ public class OperateurServiceImpl implements IOperateurService {
 	@Override
 	public void deleteOperateur(Long id) {
 		operateurRepository.deleteById(id);
-		
-	}
+
+    }
 
 	@Override
 	public Operateur updateOperateur(Operateur o) {
