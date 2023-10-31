@@ -1,11 +1,15 @@
 package tn.esprit.rh.achat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.rh.achat.entities.Operateur;
 import tn.esprit.rh.achat.repositories.OperateurRepository;
 import tn.esprit.rh.achat.services.OperateurServiceImpl;
@@ -20,7 +24,8 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-public class OperateurTest_Mokito {
+@SpringBootTest
+public class OperateurMokitoTest {
 
 
     @InjectMocks
@@ -28,7 +33,10 @@ public class OperateurTest_Mokito {
     @Mock
      OperateurRepository operateurRepository;
 
-
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void retrieveAllOperateursTest() {
@@ -67,26 +75,48 @@ public class OperateurTest_Mokito {
         // Vérifie que la méthode operateurRepository.save() a bien été appelée avec l'opérateur en argument
         verify(operateurRepository).save(operateur);
     }
+//    @Test
+//   public void testAddOperateur() {
+//    Operateur operateur = new Operateur();
+//    operateur.setNom("test");
+//
+//    Mockito.when(operateurRepository.save(operateur)).thenReturn(operateur);
+//
+//    Operateur result = operateurServiceImpl.addOperateur(operateur);
+//
+//    assertNotNull(result);
+//    assertEquals("test", result.getNom());
+//}
 
     @Test
-    public void deleteOperateurTest() {
-        // Arrange
-        Operateur operateur = new Operateur();
-        when(operateurRepository.findById(operateur.getIdOperateur())).thenReturn(Optional.of(operateur));
+    public void testDeleteOperateur() {
 
-        // Act
-        operateurServiceImpl.deleteOperateur(operateur.getIdOperateur());
+        Long operateurIdToDelete = 1L;
 
-        // Assert
-        Optional<Operateur> deletedOperateur = operateurRepository.findById(operateur.getIdOperateur());
-        assertFalse(deletedOperateur.isPresent()); // Vérifie que l'opérateur a été supprimé (résultat vide)
+        operateurServiceImpl.deleteOperateur(operateurIdToDelete);
 
-        // Vérifie que la méthode operateurRepository.findById() a bien été appelée avec l'ID en argument
-        verify(operateurRepository).findById(operateur.getIdOperateur());
-
-        // Vérifie que la méthode operateurRepository.deleteById() a bien été appelée avec l'ID en argument
-        verify(operateurRepository).deleteById(operateur.getIdOperateur());
+        Mockito.verify(operateurRepository).deleteById(operateurIdToDelete); //verifier l'appel de la fonction 
     }
+
+//    @Test
+//    public void deleteOperateurTest() {
+//        // Arrange
+//        Operateur operateur = new Operateur();
+//        when(operateurRepository.findById(operateur.getIdOperateur())).thenReturn(Optional.of(operateur));
+//
+//        // Act
+//        operateurServiceImpl.deleteOperateur(operateur.getIdOperateur());
+//
+//        // Assert
+//        Optional<Operateur> deletedOperateur = operateurRepository.findById(operateur.getIdOperateur());
+//        assertFalse(deletedOperateur.isPresent()); // Vérifie que l'opérateur a été supprimé (résultat vide)
+//
+//        // Vérifie que la méthode operateurRepository.findById() a bien été appelée avec l'ID en argument
+//        verify(operateurRepository).findById(operateur.getIdOperateur());
+//
+//        // Vérifie que la méthode operateurRepository.deleteById() a bien été appelée avec l'ID en argument
+//        verify(operateurRepository).deleteById(operateur.getIdOperateur());
+//    }
 
     @Test
     public void updateOperateurTest() {

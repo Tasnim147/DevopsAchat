@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-public class OperateurTest_JUnit {
+public class OperateurJUnitTest {
 
     @Autowired
      OperateurRepository operateurRepository;
