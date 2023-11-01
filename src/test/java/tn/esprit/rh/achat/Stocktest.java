@@ -77,4 +77,27 @@ public class Stocktest {
 
     // ... (tests pour d'autres méthodes)
 
+    @Test
+    public void testDeleteStock() {
+        Long stockIdToDelete = 1L;
+        stockService.deleteStock(stockIdToDelete);
+        verify(stockRepository).deleteById(stockIdToDelete);
+    }
+
+    @Test
+    public void testUpdateStock() {
+        Stock stockToUpdate = new Stock(1L, "UpdatedStock", 150, 15);
+        when(stockRepository.save(stockToUpdate)).thenReturn(stockToUpdate);
+        Stock result = stockService.updateStock(stockToUpdate);
+        assertEquals(stockToUpdate, result);
+    }
+
+    @Test
+    public void testRetrieveStock() {
+        Long stockIdToRetrieve = 1L;
+        Stock expectedStock = new Stock(stockIdToRetrieve, "RetrievedStock", 100, 10);
+        when(stockRepository.findById(stockIdToRetrieve)).thenReturn(java.util.Optional.ofNullable(expectedStock));
+        Stock result = stockService.retrieveStock(stockIdToRetrieve);
+        assertEquals(expectedStock, result);
+    }
 }
