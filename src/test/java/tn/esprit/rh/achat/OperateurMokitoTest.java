@@ -1,10 +1,9 @@
 package tn.esprit.rh.achat;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import tn.esprit.rh.achat.entities.Operateur;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -25,10 +25,9 @@ import static org.mockito.Mockito.*;
 
 public class OperateurMokitoTest {
 
-
     private OperateurServiceImpl operateurServiceImpl;
-
      private OperateurRepository operateurRepository;
+
     @Test
     public void addOperateurTest() {
 
@@ -40,7 +39,10 @@ public class OperateurMokitoTest {
 
     when(operateurRepository.save(newOperateur)).thenReturn(newOperateur);
 
-}
+    //verify(operateurRepository).save(newOperateur);
+
+
+    }
 
     @Test
     public void retrieveAllOperateursTest() {
@@ -54,8 +56,11 @@ public class OperateurMokitoTest {
         List<Operateur> opList = new ArrayList<>();
         opList.add(new Operateur(id1, "aaaa", "azerty", "a100"));
         opList.add(new Operateur(id2, "vest", "zzzz", "50"));
+
         when(operateurRepository.findAll()).thenReturn(opList);
 
+//        verify(operateurRepository).findAll();
+//        assertEquals(operateurServiceImpl.retrieveAllOperateurs(),opList);
     }
     @Test
     public void retrieveOperateurTest() {
@@ -68,6 +73,8 @@ public class OperateurMokitoTest {
 
         when(operateurRepository.findById(idToRetrieve)).thenReturn(Optional.of(op1));
 
+//        verify(operateurRepository).findById(idToRetrieve);
+//        assertEquals(op1.getIdOperateur(),idToRetrieve);
     }
 
 
@@ -82,8 +89,9 @@ public class OperateurMokitoTest {
         operateurServiceImpl.deleteOperateur(idToDelete);
 
         verify(operateurRepository).deleteById(idToDelete);
-
+//        assertEquals(op1.getIdOperateur(),idToDelete);
     }
+
     @Test
     public void updateExistingOperateurTest() {
         // Arrange
@@ -99,7 +107,7 @@ public class OperateurMokitoTest {
         when(operateurRepository.save(updatedOperateur)).thenReturn(updatedOperateur);
 
         verify(operateurRepository).save(updatedOperateur); // Ensure save was called with the updated object
-        assertEquals(updatedOperateur, result); // Ensure the returned object matches the updated one
+        assertEquals(updatedOperateur,result); // Ensure the returned object matches the updated one
     }
 
 }
