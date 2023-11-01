@@ -14,6 +14,7 @@ public class OperateurServiceImpl implements IOperateurService {
 	OperateurRepository operateurRepository;
 
 	public OperateurServiceImpl(OperateurRepository operateurRepository) {
+		this.operateurRepository = operateurRepository;
 	}
 
 
@@ -32,7 +33,6 @@ public class OperateurServiceImpl implements IOperateurService {
 	@Override
 	public void deleteOperateur(Long id) {
 		operateurRepository.deleteById(id);
-
     }
 
 	@Override
