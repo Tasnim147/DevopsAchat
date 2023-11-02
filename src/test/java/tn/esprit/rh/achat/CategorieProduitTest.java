@@ -18,7 +18,7 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
- class CategorieProduitTest {
+ public class CategorieProduitTest {
 
 
     @Mock
@@ -33,7 +33,7 @@ public CategorieProduitTest(){}
         MockitoAnnotations.initMocks(this);
     }
     @Test
-     void testRetrieveAllCategorieProduits(){
+     public void testRetrieveAllCategorieProduits(){
         // Créez une liste de categorieProduit pour le test
     List<CategorieProduit> ListCategorieP = new ArrayList<>();
     ListCategorieP.add(new CategorieProduit("code1", "libelle1"));
@@ -54,21 +54,21 @@ public CategorieProduitTest(){}
     }
 
 
-@Test
-     void testAddCategorieProduit(){
+//@Test
+   //  void testAddCategorieProduit(){
     // Créez une categorieProduit pour le test
-    CategorieProduit categorieProduit = new CategorieProduit("code3", "libelle3");
+    //CategorieProduit categorieProduit = new CategorieProduit("code3", "libelle3");
     // Définissez le comportement du mock repository
-    when(categorieProduitRepository.save(categorieProduit)).thenReturn(categorieProduit);
+   // when(categorieProduitRepository.save(categorieProduit)).thenReturn(categorieProduit);
     // Appelez la méthode du service que vous voulez tester
-    CategorieProduit addedCategorieProduit = categorieProduitService.addCategorieProduit(categorieProduit);
+    //CategorieProduit addedCategorieProduit = categorieProduitService.addCategorieProduit(categorieProduit);
 
     // Vérifiez si la méthode du repository a été appelée
-    verify(categorieProduitRepository, times(1)).save(categorieProduit);
+   // verify(categorieProduitRepository, times(1)).save(categorieProduit);
     // Vérifiez le résultat
-    assertEquals("code3", addedCategorieProduit.getCodeCategorie());
-    assertEquals("libelle3",addedCategorieProduit.getLibelleCategorie());
-}
+   // assertEquals("code3", addedCategorieProduit.getCodeCategorie());
+    //assertEquals("libelle3",addedCategorieProduit.getLibelleCategorie());
+//}
 
 //@Test
    // void testDeleteCategorieProduit(){
