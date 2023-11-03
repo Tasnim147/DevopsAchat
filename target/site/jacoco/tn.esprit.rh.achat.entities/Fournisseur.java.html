@@ -21,9 +21,9 @@ import lombok.Setter;
 
 @Entity
 @Getter
-<span class="nc" id="L24">@Setter</span>
+<span class="pc" id="L24">@Setter</span>
 <span class="nc" id="L25">@AllArgsConstructor</span>
-<span class="nc" id="L26">@NoArgsConstructor</span>
+<span class="fc" id="L26">@NoArgsConstructor</span>
 public class Fournisseur implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,7 +37,7 @@ public class Fournisseur implements Serializable {
 <span class="nc" id="L37">	private CategorieFournisseur  categorieFournisseur;</span>
 	@OneToMany(mappedBy=&quot;fournisseur&quot;)
 	@JsonIgnore
-<span class="nc" id="L40">	private Set&lt;Facture&gt; factures;</span>
+<span class="fc" id="L40">	private Set&lt;Facture&gt; factures;</span>
     @ManyToMany
     @JsonIgnore
 <span class="nc" id="L43">    private Set&lt;SecteurActivite&gt; secteurActivites;</span>
