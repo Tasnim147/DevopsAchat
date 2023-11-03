@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tn.esprit.rh.achat.ProduitTest" time="0.909" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tn.esprit.rh.achat.FactureTest" time="1.69" tests="8" errors="0" skipped="2" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,6 +61,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testRetrieveAllProduits" classname="tn.esprit.rh.achat.ProduitTest" time="0.03"/>
-  <testcase name="testDeleteProduit" classname="tn.esprit.rh.achat.ProduitTest" time="0.013"/>
+  <testcase name="cancelFactureTest" classname="tn.esprit.rh.achat.FactureTest" time="1.452"/>
+  <testcase name="retrieveAllFacturesTest" classname="tn.esprit.rh.achat.FactureTest" time="0.198"/>
+  <testcase name="retrieveFactureTest" classname="tn.esprit.rh.achat.FactureTest" time="0.003"/>
+  <testcase name="assignOperateurToFactureTest" classname="tn.esprit.rh.achat.FactureTest" time="0">
+    <skipped message="void tn.esprit.rh.achat.FactureTest.assignOperateurToFactureTest() is @Disabled"/>
+  </testcase>
+  <testcase name="pourcentageRecouvrementTest" classname="tn.esprit.rh.achat.FactureTest" time="0.009"/>
+  <testcase name="addDetailsFactureTest" classname="tn.esprit.rh.achat.FactureTest" time="0">
+    <skipped message="void tn.esprit.rh.achat.FactureTest.addDetailsFactureTest() is @Disabled"/>
+  </testcase>
+  <testcase name="addFactureTest" classname="tn.esprit.rh.achat.FactureTest" time="0.005"/>
+  <testcase name="getFacturesByFournisseurTest" classname="tn.esprit.rh.achat.FactureTest" time="0.004"/>
 </testsuite>
