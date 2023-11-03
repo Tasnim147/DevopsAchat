@@ -49,11 +49,38 @@ public class CategorieProduitTest {
 
         when(categorieProduitRepository.save(categorie)).thenReturn(categorie);
 //appeler la methode a tester
-        CategorieProduit result = categorieProduitService.addCategorieProduit(categorie);
+        CategorieProduit addedCategorie = categorieProduitService.addCategorieProduit(categorie);
 //verifier si la methode a ete appelee
         verify(categorieProduitRepository, times(1)).save(categorie);
     //verifier le resultat
-        assertEquals(categorie, result);
+        assertEquals(categorie, addedCategorie);
     }
+
+  @Test
+    public void testUpdateCategorieProduit() {
+        // Crée une catégorie existante dans le repository
+        long categoryId = 1L;
+        CategorieProduit categorieToUpdate = new CategorieProduit("code1", "Libelle 1");
+      categorieToUpdate.setIdCategorieProduit(categoryId);
+
+        // Simulation du comportement du repository pour les méthodes findById
+        when(categorieProduitRepository.save(categorieToUpdate)).thenReturn(categorieToUpdate);
+        CategorieProduit result = categorieProduitService.updateCategorieProduit(categorieToUpdate);
+//verifier resultat
+        assertEquals(categorieToUpdate, result);
+    }
+
+    @Test
+    public void testDeleteCategorieProduit() {
+        // Crée l'ID d'une catégorie à supprimer
+        long categoryId = 1L;
+
+        // Appel de la méthode delete du service pour supprimer la catégorie
+        categorieProduitService.deleteCategorieProduit(categoryId);
+
+        // Vérifie que la méthode du repository a été appelée pour supprimer la catégorie
+        verify(categorieProduitRepository, times(1)).deleteById(categoryId);
+    }
+
 
 }
