@@ -9,9 +9,11 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: achatdb
     volumes:
       - db_data:/var/lib/mysql
-
+  # spring app
   backend:
     image: mayssa1999/achat:1-0
     restart: unless-stopped
@@ -19,5 +21,9 @@ services:
       - "8089:8089"
     depends_on:
       - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
 volumes:
   db_data:
