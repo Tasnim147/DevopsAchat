@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysqldb:
-    image: mysql:5.7
+    image: mysql:8.0
     restart: unless-stopped
     ports:
       - "3307:3306"
@@ -11,8 +11,7 @@ services:
     environment:
       MYSQL_DATABASE: achatdb
       MYSQL_ROOT_PASSWORD: root
-    networks:
-        - mynetwork
+      MYSQL_PASSWORD: root
 
   backend:
     image: tasnimab1/achat:1-0
@@ -21,10 +20,5 @@ services:
       - "8089:8089"
     depends_on:
       - mysqldb
-    networks:
-      - mynetwork
-networks:
-  mynetwork:
-    driver: bridge
 volumes:
   db_data:
