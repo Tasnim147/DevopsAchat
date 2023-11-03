@@ -11,6 +11,8 @@ services:
       - db_data:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+        - mynetwork
 
   backend:
     image: tasnimab1/achat:1-0
@@ -19,5 +21,10 @@ services:
       - "8089:8089"
     depends_on:
       - mysqldb
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge
 volumes:
   db_data:
