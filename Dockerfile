@@ -1,0 +1,11 @@
+# Utilisation d'une image de base OpenJDK
+FROM openjdk:11-jre-slim
+# Exposer le port sur lequel votre application Spring Boot s'exécute (modifier avec le port réel)
+EXPOSE 8089
+# Définition du répertoire de travail dans le conteneur
+WORKDIR /app
+# Télécharger le fichier JAR depuis Nexus et le copier dans le conteneur
+RUN apt-get update && apt-get install -y curl
+RUN curl -o achat-1.0.jar -L "http://192.168.162.10:8081/repository/maven-releases/tn/esprit/rh/achat/1.0/achat-1.0.jar"
+# Définir le point d'entrée de votre application
+ENTRYPOINT ["java", "-jar", "achat-1.0.jar"]
