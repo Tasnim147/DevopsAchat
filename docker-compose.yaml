@@ -30,7 +30,7 @@ services:
    image : mayssa1999/crudtutofront:v1
    restart: unless-stopped
    ports:
-     - "8080:80"
+     - "5000:80"
 
 volumes:
   db_data:
