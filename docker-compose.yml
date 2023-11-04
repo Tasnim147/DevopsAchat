@@ -10,8 +10,8 @@ services:
       - db_data:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: achatdb
+      MYSQL_ROOT_PASSWORD: root
 
   backend:
     image: tasnimab1/achat:1-0
@@ -23,6 +23,6 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/achatdb?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: root
 volumes:
   db_data:
