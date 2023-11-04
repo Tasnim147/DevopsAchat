@@ -25,5 +25,12 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/achatdb?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD:
+
+  frontend:
+   image : mayssa1999/crudtutofront:v1
+   restart: unless-stopped
+   ports:
+     - "80:80"
+
 volumes:
   db_data:
