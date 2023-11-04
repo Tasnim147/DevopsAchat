@@ -1,5 +1,5 @@
 # Utilisation d'une image de base OpenJDK
-FROM openjdk:11
+FROM openjdk:11-jre-slim
 # Exposer le port sur lequel votre application Spring Boot s'exécute (modifier avec le port réel)
 EXPOSE 8089
 # Définition du répertoire de travail dans le conteneur (chaque commande bch tsir f wost rep hedheka)
