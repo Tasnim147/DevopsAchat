@@ -11,7 +11,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  backend:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,9 +21,13 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/achatdb?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url":"jdbc:mysql://db:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&createDatabaseIfNotExist=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" :  "root",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update" 
+        }'
 
 volumes:
   db_data:
