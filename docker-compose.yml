@@ -1,8 +1,8 @@
-version: '3.8'
+version: '2'
 
 services:
   db:
-    image: mysql:latest
+    image: mysql:5.7
     restart: unless-stopped
     ports:
       - "3306:3306"
@@ -17,18 +17,16 @@ services:
 
   backend:
     image: tasnimab1/achat:1-0
-    restart: always
+    restart: unless-stopped
     ports:
       - "8089:8089"
-    depends_on:
-      - db
+    depends_on: [db]
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     networks:
       - mynetwork
-
 networks:
   mynetwork:
     driver: bridge

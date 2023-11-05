@@ -6,7 +6,7 @@ EXPOSE 8089
 WORKDIR /app
 # Télécharger le fichier JAR depuis Nexus (a travers l'outil curl) et le copier dans le conteneur
 RUN apt-get update && apt-get install -y curl
-RUN curl -o achat-1.0.jar -L "http://192.168.162.10:8081/repository/maven-releases/tn/esprit/rh/achat/1.0/achat-1.0.jar"
+RUN curl -o achat-1.0.jar -L http://192.168.162.10:8081/repository/maven-releases/tn/esprit/rh/achat/1.0/achat-1.0.jar
 #Utilisez un argument de build pour définir le mot de passe pendant la build
 ARG DB_PASSWORD
 ENV DB_PASSWORD=$DB_PASSWORD
