@@ -1,14 +1,17 @@
-# Use an OpenJDK base image
 FROM openjdk:11-jre-slim
 
-# Set the working directory in the container
+# Install curl
+RUN apt-get update && apt-get install -y curl
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the JAR file from your project into the container
-COPY target/achat-1.0.jar /app/achat-1.0.jar
+# Download the JAR file from your repository
+RUN curl -o achat-1.0.jar -L "http://192.168.206.222:8081/repository/maven-releases/tn/esprit/rh/achat/1.0/achat-1.0.jar" && \
+    chmod +x achat-1.0.jar
 
-# Expose the port your Spring Boot application runs on (change to the actual port)
+# Expose the application's port
 EXPOSE 8089
 
-# Define the command to run your Spring Boot application
-CMD ["java", "-jar", "achat-1.0.jar"]
+# Define the entry point
+ENTRYPOINT ["java", "-jar", "achat-1.0.jar"]
