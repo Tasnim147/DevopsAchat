@@ -10,6 +10,8 @@ services:
       - db:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+      - AppNet
   achat-backend:
     image: yesminerebai/achat:1-0
     restart: unless-stopped
@@ -17,13 +19,20 @@ services:
       - 8089:8089
     depends_on:
       - mysqldb
-  achat-frontend:
+    networks:
+      - AppNet
+  front:
     image: nginx:latest
     restart: unless-stopped
     ports:
-      - 4200:80
+      - 80:80
     volumes:
       - c/Users/yesmi/Downloads/crud-tuto-front/dist:/usr/share/nginx/html
-
+    depends_on:
+      - achat-backend
+    networks:
+        - AppNet
 volumes:
   db:
+networks:
+  AppNet:
