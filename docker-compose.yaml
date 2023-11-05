@@ -26,11 +26,5 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD:
 
-  frontend:
-   image : mayssa1999/crudtutofront:v1
-   restart: unless-stopped
-   ports:
-     - "5000:80"
-
 volumes:
   db_data:
