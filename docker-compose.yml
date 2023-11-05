@@ -1,22 +1,32 @@
 version: '3.8'
 
 services:
-  mysqldb:
-    image: mysql:8
-    restart: unless-stopped
-    ports:
-      - 3307:3306
-    volumes:
-      - db:/var/lib/mysql
+  # MySQL database service
+  mysql:
+    image: mysql:latest
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-  achat-backend:
-    image: yasminerebai/achat:1-0
-    restart: unless-stopped
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: achatdb
     ports:
-      - 8089:8089
-    depends_on:
-      - mysqldb
-volumes:
-  db:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
 
+  # Spring Boot application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+
+
+volumes:
+  mysql-data:
