@@ -27,10 +27,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: root
 
 
-    # Frontend application service
-  front:
-      image: yasminerebai/achat:1.0-Front
-      ports:
-        - "80:80"
+
 volumes:
   mysql-data:
