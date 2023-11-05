@@ -26,8 +26,6 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
-    volumes:
-      - c/Users/yesmi/Downloads/crud-tuto-front/dist:/usr/share/nginx/html
     depends_on:
       - achat-backend
     networks:
