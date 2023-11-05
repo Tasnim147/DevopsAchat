@@ -1,44 +1,22 @@
 version: '3.8'
+
 services:
   mysqldb:
     image: mysql:5.7
-    container_name: mysql-container
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: achatd
+    restart: unless-stopped
     ports:
-      - 3306:3306
-    networks:
-      - AppNet
-
-  spring-boot:
-    image: yesminerebai/achat:1.0
-    container_name: spring
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  achat-backend:
+    image: yasminerebai/achat:1-0
+    restart: unless-stopped
     ports:
       - 8089:8089
     depends_on:
       - mysqldb
-    networks:
-      - AppNet
-    restart: on-failure
-    environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url": "jdbc:mysql://mysql:3306/achatd?useSSL=false",
-        "spring.datasource.username": "root",
-        "spring.datasource.password": "root",
-        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",
-        "spring.jpa.hibernate.ddl-auto": "update"
-      }'
+volumes:
+  db:
 
-  angular:
-    image: yesminerebai/achat:1.0-Front
-    container_name: angular
-    ports:
-      - 88:88
-    depends_on:
-      - spring-boot
-    networks:
-      - AppNet
-
-networks:
-  AppNet:
