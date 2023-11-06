@@ -30,7 +30,13 @@ services:
     networks:
       - mynetwork
 
-
+  # Frontend application service
+  front:
+    image: nourrdh/devops:front
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
 
 volumes:
   mysql-data:
