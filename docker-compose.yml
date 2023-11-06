@@ -32,7 +32,7 @@ services:
 
   # Frontend application service
   front:
-    image: nginx:latest
+    image: yasminerebai/achat:1-0-Front
     ports:
       - "80:80"
     depends_on:
