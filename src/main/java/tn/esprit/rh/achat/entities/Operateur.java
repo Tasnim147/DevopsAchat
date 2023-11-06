@@ -35,6 +35,6 @@ public class Operateur implements Serializable{
 	private Set<Facture> factures;
 
 
-	public Operateur(long id2, String vest, String zzzz, String s) {
+	public Operateur(long idOp, String nomOp, String prenomOp, String passOp) {
 	}
 }
