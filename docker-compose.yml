@@ -5,18 +5,24 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     ports:
-         - 3307:3306
+      - 3307:3306
     volumes:
-         - db:/var/lib/mysql
+      - db:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
   achat-backend:
-      image: abirmekki/achat:1-0
-      restart: unless-stopped
-      ports:
-         - 8089:8089
-      depends_on:
-         - mysqldb
+    image: abirmekki/achat:1-0
+    restart: unless-stopped
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
+  achat-front:
+    image: abirmekki/front:1-0
+    restart: unless-stopped
+    ports:
+      - 80:80
+
 
 
 volumes:

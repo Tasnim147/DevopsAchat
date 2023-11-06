@@ -2,112 +2,103 @@ package tn.esprit.rh.achat;
 
 import org.junit.jupiter.api.Test;
 
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.rh.achat.entities.Operateur;
 import tn.esprit.rh.achat.repositories.OperateurRepository;
 import tn.esprit.rh.achat.services.OperateurServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@RunWith( SpringRunner.class)
-@ContextConfiguration(classes = {OperateurServiceImpl.class})
 
+@ExtendWith(MockitoExtension.class)
 
 public class OperateurMokitoTest {
 
-    private OperateurServiceImpl operateurServiceImpl;
-     private OperateurRepository operateurRepository;
+    @InjectMocks
+    private OperateurServiceImpl operateurService;
 
-    @Test
-    public void addOperateurTest() {
+    @Mock
+    private OperateurRepository operateurRepository;
 
-    long id1 = 11;
-    Operateur newOperateur = new Operateur(id1, "aaaa", "azerty", "a100");
-
-    operateurRepository = mock(OperateurRepository.class);
-    operateurServiceImpl = new OperateurServiceImpl(operateurRepository);
-
-    when(operateurRepository.save(newOperateur)).thenReturn(newOperateur);
-
-    //verify(operateurRepository).save(newOperateur);
-
-
-    }
-
-    @Test
-    public void retrieveAllOperateursTest() {
-        // Arrange
-        Operateur operateur1 = new Operateur();
-        Operateur operateur2 = new Operateur();
-        long id1 = 123;
-        long id2 = 11;
-        operateurRepository = mock(OperateurRepository.class);
-        operateurServiceImpl = new OperateurServiceImpl(operateurRepository);
-        List<Operateur> opList = new ArrayList<>();
-        opList.add(new Operateur(id1, "aaaa", "azerty", "a100"));
-        opList.add(new Operateur(id2, "vest", "zzzz", "50"));
-
-        when(operateurRepository.findAll()).thenReturn(opList);
-
-//        verify(operateurRepository).findAll();
-//        assertEquals(operateurServiceImpl.retrieveAllOperateurs(),opList);
-    }
-    @Test
-    public void retrieveOperateurTest() {
-        // Arrange
-        Operateur op1 = new Operateur(11, "aaaa", "azerty", "a100");
-        long idToRetrieve = 11;
-
-        operateurRepository = mock(OperateurRepository.class);
-        operateurServiceImpl = new OperateurServiceImpl(operateurRepository);
-
-        when(operateurRepository.findById(idToRetrieve)).thenReturn(Optional.of(op1));
-
-//        verify(operateurRepository).findById(idToRetrieve);
-//        assertEquals(op1.getIdOperateur(),idToRetrieve);
-    }
 
 
     @Test
-    public void deleteOperateurTest() {
-        // Arrange
-        Operateur op1 = new Operateur(11, "aaaa", "azerty", "a100");
-        long idToDelete = 11;
+    public void testRetrieveAllOperateurs() {
+        List<Operateur> operateurList = new ArrayList<>();
+        operateurList.add(new Operateur());
+        operateurList.add(new Operateur());
 
-        operateurRepository = mock(OperateurRepository.class);
-        operateurServiceImpl = new OperateurServiceImpl(operateurRepository);
-        operateurServiceImpl.deleteOperateur(idToDelete);
+        when(operateurRepository.findAll()).thenReturn(operateurList);
 
-        verify(operateurRepository).deleteById(idToDelete);
-//        assertEquals(op1.getIdOperateur(),idToDelete);
+        List<Operateur> result = operateurService.retrieveAllOperateurs();
+
+        assertEquals(2, result.size());
     }
 
     @Test
-    public void updateExistingOperateurTest() {
-        // Arrange
-        Operateur op1 = new Operateur(11, "aaaa", "azerty", "a100");
+    public void testAddOperateur() {
+        Operateur operateur = new Operateur();
+        operateur.setNom("karim");
+        when(operateurRepository.save(operateur)).thenReturn(operateur);
 
+        Operateur result = operateurService.addOperateur(operateur);
 
-        operateurRepository = mock(OperateurRepository.class);
-        operateurServiceImpl = new OperateurServiceImpl(operateurRepository);
-
-        // Act
-        Operateur updatedOperateur = new Operateur(11, "sahar", "mekki", "2000");
-        Operateur result = operateurServiceImpl.updateOperateur(updatedOperateur);
-        when(operateurRepository.save(updatedOperateur)).thenReturn(updatedOperateur);
-
-        verify(operateurRepository).save(updatedOperateur); // Ensure save was called with the updated object
-        assertEquals(updatedOperateur,result); // Ensure the returned object matches the updated one
+        assertEquals(operateur, result);
+        assertEquals("karim", result.getNom());
     }
 
+    @Test
+    public void testDeleteOperateur() {
+        Long operateurIdToDelete = 1L;
+
+
+        operateurService.deleteOperateur(operateurIdToDelete);
+
+
+        verify(operateurRepository).deleteById(operateurIdToDelete);
+    }
+
+    @Test
+    public void testUpdateOperateur() {
+        Operateur operateur = new Operateur();
+        operateur.setIdOperateur(1L);
+        operateur.setNom("test update");
+
+
+        when(operateurRepository.save(operateur)).thenReturn(operateur);
+
+        Operateur result = operateurService.updateOperateur(operateur);
+
+        assertNotNull(result);
+        assertEquals("test update", result.getNom());
+    }
+    @Test
+    public void testRetrieveOperateur() {
+        Long id = 1L;
+
+        Operateur operateur = new Operateur();
+        operateur.setIdOperateur(1L);
+        operateur.setPrenom("karim");
+
+        when(operateurRepository.findById(id)).thenReturn(java.util.Optional.of(operateur));
+
+        Operateur result = operateurService.retrieveOperateur(id);
+
+        assertEquals(operateur, result);
+
+        assertEquals("karim", result.getPrenom());
+    }
 }
