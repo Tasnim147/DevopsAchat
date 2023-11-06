@@ -15,7 +15,7 @@ services:
       - db_data:/var/lib/mysql
   # spring app
   backend:
-    image: mayssa1999/achat:1-0
+    image: neilamaysa/achat:1-0
     restart: unless-stopped
     ports:
       - "8089:8089"
