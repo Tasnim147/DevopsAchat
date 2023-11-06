@@ -32,9 +32,11 @@ services:
 
   # Frontend application service
   front:
-    image: nourrdh/devops:front
+    image: nginx:latest
     ports:
       - "80:80"
+    depends_on:
+      - app
     networks:
       - mynetwork
 
