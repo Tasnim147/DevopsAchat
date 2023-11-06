@@ -35,7 +35,17 @@ services:
     ports:
       - "80:80"
 
- 
+  # PHPMyAdmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
 
 volumes:
   mysql-data:
