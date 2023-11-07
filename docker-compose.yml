@@ -12,9 +12,10 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     networks:
       my-custom-network:
-        ipv4_address: 172.19.0.4  # Specify the desired IP address
+        ipv4_address: 172.19.0.4
+
   achat-backend:
-    image: abirmekki/achat:1-0
+    image: abirmekki/achat:1-1
     restart: unless-stopped
     ports:
       - 8089:8089
@@ -22,19 +23,21 @@ services:
       - mysqldb
     networks:
       my-custom-network:
-        ipv4_address: 172.19.0.5  # Specify the desired IP address
+        ipv4_address: 172.19.0.5
+
   achat-front:
-    image: abirmekki/front:1-0
+    image: abirmekki/front:1-1
     restart: unless-stopped
     ports:
       - 80:80
     networks:
       my-custom-network:
-        ipv4_address: 172.19.0.6  # Specify the desired IP address
+        ipv4_address: 172.19.0.6
 
 volumes:
   db:
-    #to custumize the @
+  # Customize the volume as needed.
+
 networks:
   my-custom-network:
     driver: bridge
