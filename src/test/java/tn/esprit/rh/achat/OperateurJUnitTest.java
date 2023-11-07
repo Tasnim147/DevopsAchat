@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 
-@TestPropertySource(locations = "classpath:application.properties")
+//@TestPropertySource(locations = "classpath:application.properties")
 public class OperateurJUnitTest {
 
    @Autowired

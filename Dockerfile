@@ -1,5 +1,5 @@
 # Use an OpenJDK base image
-FROM openjdk:11-jre-slim
+FROM openjdk:11
 
 # Expose the port your Spring Boot application runs on (change to the actual port)
 EXPOSE 8089
