@@ -38,7 +38,7 @@ services:
       depends_on:
         - app
       networks:
-        - my-network
+        - mynetwork
 
 volumes:
   mysql-data:
