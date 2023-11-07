@@ -1,22 +1,17 @@
 package tn.esprit.rh.achat;
 
-
-import nonapi.io.github.classgraph.concurrency.AutoCloseableExecutorService;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.rh.achat.entities.Operateur;
 import tn.esprit.rh.achat.repositories.OperateurRepository;
 import tn.esprit.rh.achat.services.OperateurServiceImpl;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 
-//@TestPropertySource(locations = "classpath:application.properties")
+
 public class OperateurJUnitTest {
 
    @Autowired
@@ -48,9 +43,9 @@ public class OperateurJUnitTest {
     void testAddOperateur() {
 
         Operateur newOperateur = new Operateur();
-        newOperateur.setNom("karim");
-        newOperateur.setPrenom("mejbri");
-        newOperateur.setPassword("0");
+        newOperateur.setNom("abir1");
+        newOperateur.setPrenom("mekki1");
+        newOperateur.setPassword("1");
 
         Operateur addedOperateur = operateurServiceImpl.addOperateur(newOperateur);
 
@@ -59,16 +54,18 @@ public class OperateurJUnitTest {
         Operateur retrievedOperateur = operateurRepository.findById(addedOperateur.getIdOperateur()).orElse(null);
 
         assertNotNull(retrievedOperateur);
-        assertEquals("karim", retrievedOperateur.getNom());
-        assertEquals("mejbri", retrievedOperateur.getPrenom());
-        assertEquals("0", retrievedOperateur.getPassword());
+        assertEquals("abir1", retrievedOperateur.getNom());
+        assertEquals("mekki1", retrievedOperateur.getPrenom());
+        assertEquals("1", retrievedOperateur.getPassword());
     }
 
     @Test
     void testDeleteOperateur() {
         // Create a new Operateur object
         Operateur newOperateur = new Operateur();
-        newOperateur.setNom("testoperature");
+        newOperateur.setNom("abir2");
+        newOperateur.setPrenom("mekki2");
+        newOperateur.setPassword("2");
 
         // Save the Operateur using the repository
         Operateur addedOperateur = operateurRepository.save(newOperateur);
@@ -88,44 +85,38 @@ public class OperateurJUnitTest {
     void testUpdateOperateur() {
 
         Operateur newOperateur = new Operateur();
-        newOperateur.setNom("testoperature2");
-
+        newOperateur.setNom("abir3");
+        newOperateur.setPrenom("mekki3");
+        newOperateur.setPassword("3");
 
         Operateur addedOperateur = operateurRepository.save(newOperateur);
 
-
-        addedOperateur.setNom("updatedtestoperature2");
-
+        addedOperateur.setNom("abir3");
 
         Operateur updatedOperateur = operateurServiceImpl.updateOperateur(addedOperateur);
 
-
         Operateur retrievedOperateur = operateurRepository.findById(addedOperateur.getIdOperateur()).orElse(null);
 
-
-        assertEquals("updatedtestoperature2", retrievedOperateur.getNom());
+        assertEquals("abir3", retrievedOperateur.getNom());
+        assertEquals("mekki3", retrievedOperateur.getPrenom());
     }
     @Test
     void testRetrieveOperateur() {
 
         Operateur newOperateur = new Operateur();
-        newOperateur.setNom("test3");
-        newOperateur.setPrenom("test3p");
-        newOperateur.setPassword("12345");
-
+        newOperateur.setNom("abir4");
+        newOperateur.setPrenom("mekki4");
+        newOperateur.setPassword("4");
 
         Operateur addedOperateur = operateurServiceImpl.addOperateur(newOperateur);
 
-
         Operateur retrievedOperateur = operateurServiceImpl.retrieveOperateur(addedOperateur.getIdOperateur());
-
 
         assertNotNull(retrievedOperateur);
 
-
-        assertEquals("test3", retrievedOperateur.getNom());
-        assertEquals("test3p", retrievedOperateur.getPrenom());
-        assertEquals("12345", retrievedOperateur.getPassword());
+        assertEquals("abir4", retrievedOperateur.getNom());
+        assertEquals("mekki4", retrievedOperateur.getPrenom());
+        assertEquals("4", retrievedOperateur.getPassword());
     }
 
 

@@ -20,12 +20,17 @@ services:
       - 8089:8089
     depends_on:
       - mysqldb
+    networks:
+      my-custom-network:
+        ipv4_address: 172.19.0.5  # Specify the desired IP address
   achat-front:
     image: abirmekki/front:1-0
     restart: unless-stopped
     ports:
       - 80:80
-
+    networks:
+      my-custom-network:
+        ipv4_address: 172.19.0.6  # Specify the desired IP address
 
 volumes:
   db:

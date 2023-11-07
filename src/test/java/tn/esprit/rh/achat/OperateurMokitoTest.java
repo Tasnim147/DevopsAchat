@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -14,8 +13,6 @@ import tn.esprit.rh.achat.services.OperateurServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,50 +37,57 @@ public class OperateurMokitoTest {
         List<Operateur> operateurList = new ArrayList<>();
         operateurList.add(new Operateur());
         operateurList.add(new Operateur());
+        operateurList.add(new Operateur());
+        operateurList.add(new Operateur());
 
         when(operateurRepository.findAll()).thenReturn(operateurList);
 
         List<Operateur> result = operateurService.retrieveAllOperateurs();
 
-        assertEquals(2, result.size());
+        assertEquals(4, result.size());
     }
 
     @Test
     public void testAddOperateur() {
         Operateur operateur = new Operateur();
-        operateur.setNom("karim");
+        operateur.setNom("sahar1");
+        operateur.setPrenom("BJ1");
+        operateur.setPassword("0");
         when(operateurRepository.save(operateur)).thenReturn(operateur);
 
         Operateur result = operateurService.addOperateur(operateur);
 
         assertEquals(operateur, result);
-        assertEquals("karim", result.getNom());
+        assertEquals("sahar1", result.getNom());
+        assertEquals("BJ1", result.getPrenom());
+        assertEquals("0", result.getPassword());
     }
 
     @Test
     public void testDeleteOperateur() {
-        Long operateurIdToDelete = 1L;
+        Long IdToDelete = 1L;
 
+        operateurService.deleteOperateur(IdToDelete);
 
-        operateurService.deleteOperateur(operateurIdToDelete);
-
-
-        verify(operateurRepository).deleteById(operateurIdToDelete);
+        verify(operateurRepository).deleteById(IdToDelete);
     }
 
     @Test
     public void testUpdateOperateur() {
         Operateur operateur = new Operateur();
         operateur.setIdOperateur(1L);
-        operateur.setNom("test update");
-
+        operateur.setNom("sahar2");
+        operateur.setPrenom("BJ2");
+        operateur.setPassword("00");
 
         when(operateurRepository.save(operateur)).thenReturn(operateur);
 
         Operateur result = operateurService.updateOperateur(operateur);
 
         assertNotNull(result);
-        assertEquals("test update", result.getNom());
+        assertEquals("sahar2", result.getNom());
+        assertEquals("BJ2", result.getPrenom());
+        assertEquals("00", result.getPassword());
     }
     @Test
     public void testRetrieveOperateur() {
@@ -91,7 +95,9 @@ public class OperateurMokitoTest {
 
         Operateur operateur = new Operateur();
         operateur.setIdOperateur(1L);
-        operateur.setPrenom("karim");
+        operateur.setNom("sahar3");
+        operateur.setPrenom("BJ3");
+        operateur.setPassword("000");
 
         when(operateurRepository.findById(id)).thenReturn(java.util.Optional.of(operateur));
 
@@ -99,6 +105,8 @@ public class OperateurMokitoTest {
 
         assertEquals(operateur, result);
 
-        assertEquals("karim", result.getPrenom());
+        assertEquals("sahar3", result.getNom());
+        assertEquals("BJ3", result.getPrenom());
+        assertEquals("000", result.getPassword());
     }
 }
