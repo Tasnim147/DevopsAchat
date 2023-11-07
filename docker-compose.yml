@@ -30,6 +30,16 @@ services:
     networks:
       - mynetwork
 
+    # Frontend application service
+  front:
+      image: tasnimab1/achat:1-0-Front
+      ports:
+        - "80:80"
+      depends_on:
+        - app
+      networks:
+        - my-network
+
 volumes:
   mysql-data:
 networks:
