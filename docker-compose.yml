@@ -34,7 +34,7 @@ services:
   front:
       image: tasnimab1/achat:1-0-Front
       ports:
-        - "80:80"
+        - "8090:8090"
       depends_on:
         - app
       networks:
