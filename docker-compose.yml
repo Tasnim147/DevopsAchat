@@ -6,7 +6,6 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: achatdb
     ports:
       - "3306:3306"
     volumes:
