@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: tn.esprit.rh.achat.FactureTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 3.882 s - in tn.esprit.rh.achat.FactureTest
