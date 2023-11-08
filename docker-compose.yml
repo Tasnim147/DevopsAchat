@@ -31,7 +31,7 @@ services:
 
   # Frontend application service
   front:
-    image: yasminerebai/achat:1-0-Front
+    image: yasminerebai/achat:1.0-Front
     ports:
       - "80:80"
     depends_on:
