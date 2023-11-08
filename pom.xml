@@ -71,8 +71,24 @@
 			<version>0.8.7</version>
 			<scope>test</scope>
 		</dependency>
+			<!-- Other dependencies -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-registry-prometheus</artifactId>
+			</dependency>
 
 	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>deploymentRepo</id>
+			<name>Nexus Repository</name>
+			<url>http://192.168.162.10:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<plugins>
@@ -124,12 +140,6 @@
 			</pluginManagement>
 	</build>
 	<!-- Deploy to Nexus -->
-	<distributionManagement>
-		<repository>
-			<id>deploymentRepo</id>
-			<name>Nexus Repository</name>
-			<url>http://192.168.162.10:8081/repository/maven-releases/</url>
-		</repository>
-	</distributionManagement>
+
 
 </project>
