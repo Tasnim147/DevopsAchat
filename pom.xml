@@ -85,11 +85,8 @@
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.prometheus</groupId>
-			<artifactId>simpleclient_httpserver</artifactId>
-			<version>0.13.0</version>
-		</dependency>
+
+
 
 	</dependencies>
 
