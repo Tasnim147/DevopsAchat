@@ -28,7 +28,7 @@ services:
     networks:
       - my-network
   angular_app:
-    image: nourrdh/devops:front
+    image: nourrdh/angular
     container_name: devops_angular
     ports:
       - "80:80"
