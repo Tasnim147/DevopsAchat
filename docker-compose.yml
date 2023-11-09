@@ -14,7 +14,7 @@ services:
     networks:
       - my-network
   spring_boot_app:
-    image: nourrdh/spring
+    image: nourrdh/springapp
     container_name: devops_project_spring
     ports:
       - "8089:8089"
