@@ -1,3 +1,4 @@
+
 FROM openjdk:11-jre-slim
 EXPOSE 8089
 WORKDIR /app
@@ -8,3 +9,5 @@ RUN curl -o achat-1.0.jar -L "http://192.168.206.223:8081/repository/maven-relea
 
 
 ENTRYPOINT ["java", "-jar", "achat-1.0.jar"]
+
+
