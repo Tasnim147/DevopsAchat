@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "Gestion des categories Produit")
-@RequestMapping("/categorieProduit")
+@RequestMapping("/SpringMVC/categorieProduit")
 public class CategorieProduitController {
 
 	@Autowired
