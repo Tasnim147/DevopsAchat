@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "Gestion des factures")
-@RequestMapping("/facture")
+@RequestMapping("/SpringMVC/facture")
 @CrossOrigin("*")
 public class FactureRestController {
 
