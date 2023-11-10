@@ -11,8 +11,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      my-custom-network:
-        ipv4_address: 172.19.0.4
+      - mynetwork
 
   # Spring Boot application service
   app:
@@ -23,9 +22,12 @@ services:
       - "8089:8089"
     depends_on:
       - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
     networks:
-      my-custom-network:
-        ipv4_address: 172.19.0.5
+      - mynetwork
 
   # Frontend application service
   front:
@@ -35,14 +37,9 @@ services:
     depends_on:
       - app
     networks:
-      my-custom-network:
-        ipv4_address: 172.19.0.6
+      - mynetwork
 
 volumes:
   mysql-data:
 networks:
-  my-custom-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.19.0.0/16
+  mynetwork:
