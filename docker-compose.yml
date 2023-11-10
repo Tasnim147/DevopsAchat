@@ -1,37 +1,45 @@
 version: '3.8'
-# definir container
-services:
 
-  db:
+services:
+  # MySQL database service
+  mysql:
     image: mysql:latest
-    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: achatdb
     volumes:
-      - db_data:/var/lib/mysql
-  # spring app
-  backend:
-    image: amalennj/achat:1-1
-    restart: unless-stopped
-    ports:
-      - "8082:8082"
-    depends_on:
-      - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mynetwork
 
-  Frontend:
-    image: amalennj/achatfront
-    restart: unless-stopped
+  # Spring Boot application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - mynetwork
+
+  # Frontend application service
+  front:
+    image: yasminerebai/achat:1.0-Front
     ports:
       - "80:80"
     depends_on:
-      - backend
+      - app
+    networks:
+      - mynetwork
+
 volumes:
-  db_data:
+  mysql-data:
+networks:
+  mynetwork:
