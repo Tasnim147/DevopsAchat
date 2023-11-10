@@ -11,7 +11,8 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - mynetwork
+      my-custom-network:
+        ipv4_address: 172.19.0.4
 
   # Spring Boot application service
   app:
@@ -27,7 +28,8 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     networks:
-      - mynetwork
+      my-custom-network:
+        ipv4_address: 172.19.0.5
 
   # Frontend application service
   front:
@@ -37,9 +39,14 @@ services:
     depends_on:
       - app
     networks:
-      - mynetwork
+      my-custom-network:
+        ipv4_address: 172.19.0.6
 
 volumes:
   mysql-data:
 networks:
-  mynetwork:
+  my-custom-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
