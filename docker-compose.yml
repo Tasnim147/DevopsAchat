@@ -23,10 +23,6 @@ services:
       - "8089:8089"
     depends_on:
       - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
     networks:
       my-custom-network:
         ipv4_address: 172.19.0.5
